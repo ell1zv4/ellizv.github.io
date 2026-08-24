@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b0a0f">
+  <title>Bizkaifest · Instalaciones</title>
+  <style>
+    :root{color-scheme:dark;--bg:#0b0a0f;--text:#f3eefe;--muted:#807a9a;--line:#1e1b24;--bar:#d7cffb;--online:#77d9ad}
+    *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;background:var(--bg);overflow:hidden}body{color:var(--text);font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    main{width:min(920px,calc(100% - 36px));height:100dvh;margin:0 auto;display:grid;grid-template-rows:auto minmax(0,1.1fr) auto minmax(0,.8fr) auto;padding:20px 0 14px}
+    header{display:flex;justify-content:space-between;align-items:center;padding-bottom:15px;border-bottom:1px solid var(--line)}header strong{font-size:11px;letter-spacing:.14em}.connection{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:10px}.connection i{width:6px;height:6px;border-radius:50%;background:var(--muted)}.connection.online i{background:var(--online)}
+    .hero{display:flex;align-items:center;justify-content:center;text-align:center;min-height:0}.hero p{margin:0 0 7px;color:var(--muted);font-size:11px}.hero h1{margin:0;font-size:clamp(64px,12vh,118px);line-height:.9;letter-spacing:-.075em;font-weight:620}.hero small{display:block;margin-top:10px;color:#6e6878;font-size:9px}
+    .stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.stats>div{padding:13px 16px}.stats>div+div{border-left:1px solid var(--line)}.stats span,.stats small{display:block;color:var(--muted);font-size:9px}.stats strong{display:block;margin:4px 0 2px;font-size:clamp(20px,3.2vh,30px);font-weight:590;letter-spacing:-.04em}
+    .trend{display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0;padding:16px 0 5px}.trend-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin-bottom:8px}.trend h2{margin:0 0 2px;font-size:12px;font-weight:590}.trend-head span,.trend-head strong{color:var(--muted);font-size:9px;font-weight:500}.chart{display:flex;align-items:flex-end;gap:5px;min-height:0}.bar-wrap{flex:1;height:100%;display:flex;align-items:flex-end;min-width:0}.bar{width:100%;min-height:2px;background:var(--bar);opacity:.78;border-radius:2px 2px 0 0}.labels{display:grid;grid-template-columns:repeat(14,1fr);gap:5px;margin-top:5px;color:#625c6d;font-size:8px;text-align:center}
+    footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:10px;border-top:1px solid var(--line);color:#6e6878;font-size:9px}footer b{color:var(--text);font-weight:560}
+    @media(max-width:560px){main{width:min(100% - 24px,920px);padding-top:14px;grid-template-rows:auto minmax(0,.9fr) auto minmax(0,.72fr) auto}.hero h1{font-size:clamp(58px,11vh,88px)}.stats{grid-template-columns:1fr 1fr}.stats>div{padding:9px 8px}.stats>div:nth-child(3){border-left:0;border-top:1px solid var(--line)}.stats>div:nth-child(4){border-top:1px solid var(--line)}.trend{padding-top:11px}.chart{gap:3px}.labels{gap:3px}}
+    @media(max-height:650px){main{padding-top:10px}.hero h1{font-size:58px}.hero small{margin-top:5px}.stats>div{padding-top:7px;padding-bottom:7px}.trend{padding-top:8px}.trend-head{margin-bottom:4px}footer{padding-top:6px}}
+  </style>
+</head>
+<body>
+<main>
+  <header><strong>BIZKAIFEST</strong><span class="connection"><i></i><span id="connectionText">Conectando</span></span></header>
+  <section class="hero"><div><p>Instalaciones conocidas</p><h1 id="total">2.460+</h1><small>mínimo conocido · App Store + Google Play</small></div></section>
+  <section class="stats">
+    <div><span>iOS</span><strong id="ios">2.360+</strong><small>App Store</small></div>
+    <div><span>Android</span><strong id="android">100+</strong><small>Google Play</small></div>
+    <div><span>Activos hoy</span><strong id="activeToday">—</strong><small>Firebase</small></div>
+    <div><span>Activos 30 días</span><strong id="active30">—</strong><small>Firebase</small></div>
+  </section>
+  <section class="trend"><div class="trend-head"><div><h2>Dispositivos detectados</h2><span>últimos 14 días</span></div><strong id="week">—</strong></div><div id="chart" class="chart"></div><div id="labels" class="labels"></div></section>
+  <footer><span><b id="today">—</b> detectados hoy</span><span id="updated">—</span></footer>
+</main>
+<script>
+const endpoint='https://api-bizkaifest.duckdns.org/api/v1/installation-metrics';const fmt=new Intl.NumberFormat('es-ES');const el=id=>document.getElementById(id);
+function render(data){el('total').textContent=fmt.format(Number(data.total||2460))+(data.totalIsFloor?'+':'');el('ios').textContent=fmt.format(Number(data.ios||2360))+(data.iosIsFloor?'+':'');el('android').textContent=fmt.format(Number(data.android||100))+(data.androidIsFloor?'+':'');el('activeToday').textContent=fmt.format(Number(data.activeToday||0));el('active30').textContent=fmt.format(Number(data.active30||0));el('today').textContent='+'+fmt.format(Number(data.today||0));const daily=Array.isArray(data.daily)?data.daily.slice(-14):[];const week=daily.slice(-7).reduce((s,p)=>s+Number(p.count||0),0);el('week').textContent='+'+fmt.format(week)+' · 7 días';renderChart(daily);const d=data.updatedAt?new Date(data.updatedAt):new Date();el('updated').textContent=d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'})}
+function renderChart(points){const chart=el('chart'),labels=el('labels');chart.replaceChildren();labels.replaceChildren();const safe=points.length?points:Array.from({length:14},()=>({label:'',count:0}));const max=Math.max(1,...safe.map(p=>Number(p.count||0)));for(const p of safe){const w=document.createElement('div');w.className='bar-wrap';const b=document.createElement('div');b.className='bar';b.style.height=Math.max(2,Number(p.count||0)/max*100)+'%';w.appendChild(b);chart.appendChild(w);const l=document.createElement('span');l.textContent=p.label||'';labels.appendChild(l)}}
+async function refresh(){try{const r=await fetch(endpoint,{cache:'no-store'});if(!r.ok)throw new Error('HTTP '+r.status);render(await r.json());document.querySelector('.connection').classList.add('online');el('connectionText').textContent='En directo'}catch(_){document.querySelector('.connection').classList.remove('online');el('connectionText').textContent='Datos base';if(!el('chart').children.length)renderChart([])}}refresh();setInterval(refresh,5000);
+</script>
+</body>
+</html>
