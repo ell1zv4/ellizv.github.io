@@ -1,1 +1,1 @@
-(()=>{const s=document.querySelector('[data-disassemble]');if(!s||matchMedia('(prefers-reduced-motion: reduce)').matches)return;let ticking=false;const sticky=s.querySelector('.hero-sticky');const draw=()=>{const r=s.getBoundingClientRect();const distance=Math.max(1,s.offsetHeight-innerHeight);let p=Math.max(0,Math.min(1,-r.top/distance));p=p*p*(3-2*p);sticky.style.setProperty('--p',p.toFixed(4));ticking=false};addEventListener('scroll',()=>{if(!ticking){requestAnimationFrame(draw);ticking=true}},{passive:true});addEventListener('resize',draw);draw()})();
+(()=>{})();
