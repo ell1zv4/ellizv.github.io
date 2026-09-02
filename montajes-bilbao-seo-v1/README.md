@@ -10,7 +10,7 @@ Repositorio de apoyo del sitio web oficial de **Montajes Bilbao, S.L.**
 - Actividad: fabricación, construcción y montaje de estructuras metálicas y calderería en general
 - Ámbito de trabajo indicado: España, Portugal y Francia
 
-## Páginas principales
+## Páginas principales del sitio oficial
 
 - Empresa: https://montajes-bilbao.vercel.app/empresa/
 - Servicios: https://montajes-bilbao.vercel.app/servicios/
@@ -18,4 +18,10 @@ Repositorio de apoyo del sitio web oficial de **Montajes Bilbao, S.L.**
 - Contacto: https://montajes-bilbao.vercel.app/contacto/
 - Sitemap: https://montajes-bilbao.vercel.app/sitemap.xml
 
-La URL canónica y fuente principal de información pública es https://montajes-bilbao.vercel.app/ .
+## Perfiles empresariales de terceros que identifican la misma entidad
+
+- Iberinform: https://www.iberinform.es/empresa/555399/montajes-bilbao
+- eInforma: https://www.einforma.com/informacion-empresa/montajes-bilbao
+- Empresia: https://www.empresia.es/empresa/montajes-bilbao/
+
+Estos perfiles de terceros se incluyen únicamente para facilitar la reconciliación de identidad de la empresa. La URL canónica y fuente principal de información pública es https://montajes-bilbao.vercel.app/ .
