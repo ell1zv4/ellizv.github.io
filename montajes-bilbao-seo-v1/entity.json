@@ -1,0 +1,25 @@
+{
+  "@context": "https://schema.org",
+  "@type": ["Organization", "LocalBusiness"],
+  "name": "Montajes Bilbao",
+  "alternateName": ["Montajes Bilbao, S.L.", "MONTAJES BILBAO SL"],
+  "legalName": "MONTAJES BILBAO SL",
+  "url": "https://montajes-bilbao.vercel.app/",
+  "taxID": "B48117667",
+  "telephone": "+34946712008",
+  "foundingDate": "1981",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Polígono Industrial Martiartu, Calle 1, Pabellón 48",
+    "postalCode": "48480",
+    "addressLocality": "Arrigorriaga",
+    "addressRegion": "Bizkaia",
+    "addressCountry": "ES"
+  },
+  "areaServed": ["España", "Portugal", "Francia"],
+  "sameAs": [
+    "https://www.iberinform.es/empresa/555399/montajes-bilbao",
+    "https://www.einforma.com/informacion-empresa/montajes-bilbao",
+    "https://www.empresia.es/empresa/montajes-bilbao/"
+  ]
+}
